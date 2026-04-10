@@ -19,7 +19,7 @@ public class OrderItems {
 
     private Integer qty;
 
-    @ManyToOne()
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "order_id")
     private Orders orders;
 

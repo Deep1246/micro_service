@@ -20,7 +20,7 @@ import java.util.stream.Stream;
 @RequiredArgsConstructor
 public class OrderServiceImpl implements OrderService {
 
-    private OrdersRepository ordersRepository;
+    private final OrdersRepository ordersRepository;
 
     @Override
     public List<OrderRequestDto> getAllOrders() {

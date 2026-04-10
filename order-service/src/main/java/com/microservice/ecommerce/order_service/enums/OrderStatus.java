@@ -2,5 +2,5 @@ package com.microservice.ecommerce.order_service.enums;
 
 public enum OrderStatus {
 
-    CONFIRMED,CANCELLED,PENDING;
+    CREATED, CONFIRMED,CANCELLED,PENDING;
 }

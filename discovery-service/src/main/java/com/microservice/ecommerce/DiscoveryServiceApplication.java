@@ -2,14 +2,14 @@ package com.microservice.ecommerce;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
+import org.springframework.cloud.netflix.eureka.server.EnableEurekaServer;
 
-@EnableDiscoveryClient
+@EnableEurekaServer
 @SpringBootApplication
-public class InventoryServiceApplication {
+public class DiscoveryServiceApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(InventoryServiceApplication.class, args);
+		SpringApplication.run(DiscoveryServiceApplication.class, args);
 	}
 
 }
