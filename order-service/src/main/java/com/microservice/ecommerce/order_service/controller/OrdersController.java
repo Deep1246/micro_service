@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestClient;
+import tools.jackson.databind.ObjectMapper;
 
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -49,17 +50,23 @@ public class OrdersController {
     public ResponseEntity<?> fetchAllInventory(){
 
 
-        ServiceInstance inventoryService = discoveryClient.getInstances("inventory-service").getFirst();
+        Map inventories = orderService.findInventories();
 
-        System.out.println(inventoryService.getUri());
-        String body = restClient
-                .get()
-                .uri(inventoryService.getUri().resolve("/api/v1/products"))
-                .retrieve()
-                .body(String.class);
+//        ServiceInstance inventoryService = discoveryClient.getInstances("inventory-service").getFirst();
+//
+//        System.out.println(inventoryService.getUri());
+//        String body = restClient
+//                .get()
+//                .uri(inventoryService.getUri().resolve("/api/v1/products"))
+//                .retrieve()
+//                .body(String.class);
+//
+//        ObjectMapper obj = new ObjectMapper();
+//
+//        Map map = obj.convertValue(body, Map.class);
 
 
-        return ResponseEntity.ok(body);
+        return ResponseEntity.ok(inventories);
     }
 
 
