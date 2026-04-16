@@ -7,6 +7,7 @@ import com.microservice.ecommerce.order_service.entity.Orders;
 import com.microservice.ecommerce.order_service.repository.OrdersRepository;
 import com.microservice.ecommerce.order_service.service.OrderService;
 import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
+import jakarta.ws.rs.core.Link;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.cloud.client.ServiceInstance;
@@ -14,6 +15,7 @@ import org.springframework.cloud.client.discovery.DiscoveryClient;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestClient;
+import tools.jackson.core.type.TypeReference;
 import tools.jackson.databind.ObjectMapper;
 
 import java.math.BigDecimal;
@@ -68,7 +70,7 @@ public class OrderServiceImpl implements OrderService {
 
     @CircuitBreaker(name = "findInventories", fallbackMethod = "findInventoriesFallBack")
     @Override
-    public Map findInventories() {
+    public List<LinkedHashMap>  findInventories() {
 
 
         ServiceInstance inventoryService = discoveryClient.getInstances("inventory-service").getFirst();
@@ -76,19 +78,23 @@ public class OrderServiceImpl implements OrderService {
         System.out.println(inventoryService.getUri());
         String body = restClient
                 .get()
-                .uri(inventoryService.getUri().resolve("/api/v1/products"))
+                .uri(inventoryService.getUri().resolve("/inventory-service/api/v1/products"))
                 .retrieve()
                 .body(String.class);
 
-        ObjectMapper obj = new ObjectMapper();
+        ObjectMapper mapper = new ObjectMapper();
 
-        Map map = obj.convertValue(body, Map.class);
 
-        return map;
+        List<LinkedHashMap> linkedHashMaps = mapper.readValue(body, new TypeReference<List<LinkedHashMap>>() {
+        });
+
+
+
+        return linkedHashMaps;
 
     }
 
-    public Map findInventoriesFallBack(Throwable ex){
+    public List<LinkedHashMap> findInventoriesFallBack(Throwable ex){
 
 
         log.info("Fallback :: findInventoriesFallBack Method invoke");
@@ -97,6 +103,6 @@ public class OrderServiceImpl implements OrderService {
 
 
 
-        return Collections.emptyMap();
+        return List.of(new LinkedHashMap());
     }
 }

@@ -9,6 +9,8 @@
         <option value="$PROJECT_DIR$/discovery-service/pom.xml" />
         <option value="$PROJECT_DIR$/../app-api-gateway/pom.xml" />
         <option value="$PROJECT_DIR$/api-gateway/pom.xml" />
+        <option value="$PROJECT_DIR$/api-gateway-ecommerce/pom.xml" />
+        <option value="$PROJECT_DIR$/ecommerce-config-server/pom.xml" />
       </list>
     </option>
     <option name="ignoredFiles">

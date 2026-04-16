@@ -2,6 +2,7 @@ package com.microservice.ecommerce.order_service.service;
 
 import com.microservice.ecommerce.order_service.dtos.OrderRequestDto;
 
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -11,5 +12,5 @@ public interface OrderService {
 
     public OrderRequestDto getOrderById(Long id);
 
-    Map findInventories();
+    List<LinkedHashMap>  findInventories();
 }

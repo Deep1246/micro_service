@@ -32,10 +32,10 @@ public class ProductServiceImpl implements ProductService {
 
         long currentValue = System.currentTimeMillis();
 
-        if(currentValue % 2==0){
-            log.error("simulated more than expected no of request");
-            throw  new RuntimeException(String.format("simulation failed due inconvinent %s" ,currentValue));
-        }
+//        if(currentValue % 2==0){
+//            log.error("simulated more than expected no of request");
+//            throw  new RuntimeException(String.format("simulation failed due inconvinent %s" ,currentValue));
+//        }
 
         List<Product> inventories = productRepo.findAll();
 

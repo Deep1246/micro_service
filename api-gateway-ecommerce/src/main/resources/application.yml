@@ -1,0 +1,41 @@
+#spring.application.name=api-gateway-ecommerce
+
+
+spring:
+  application:
+    name: api-gateway-ecommerce
+
+  cloud:
+    gateway:
+      server:
+        webflux:
+          routes:
+            - id: inventory-service
+              uri: lb://inventory-service
+              predicates:
+                - Path=/ecom/inventory-service/**
+                - Between=2026-04-16T15:52:00+05:30[Asia/Kolkata],2026-04-16T15:54:00+05:30[Asia/Kolkata]
+              filters:
+                - StripPrefix=1
+            - id: order-service
+              uri: lb://order-service
+              predicates:
+                - Path=/ecom/order-service/**
+              filters:
+                - StripPrefix=1
+
+
+
+
+
+#  eureka.client.service-url.defaultZone=http://localhost:8761/eureka
+
+
+#spring.cloud.gateway.server.webflux.routes[0].id=inventory-service
+#spring.cloud.gateway.server.webflux.routes[0].uri=lb://inventory-service
+#spring.cloud.gateway.server.webflux.routes[0].predicates[0]=Path=/inventory-service/**
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka
+

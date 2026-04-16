@@ -50,7 +50,7 @@ public class OrdersController {
     public ResponseEntity<?> fetchAllInventory(){
 
 
-        Map inventories = orderService.findInventories();
+        var inventories = orderService.findInventories();
 
 //        ServiceInstance inventoryService = discoveryClient.getInstances("inventory-service").getFirst();
 //
